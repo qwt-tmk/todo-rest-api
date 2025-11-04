@@ -1,0 +1,47 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "app/docs/**"
+      - "Dockerfile.**"
+      - "compose.yml"
+      - "air.toml"
+
+jobs:
+  unit-test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/setup-go@v5
+      - name: Go Setup
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: app/go.mod
+          cache: true
+          cache-dependency-path: app/go.sum
+      - name: Setup Workspace
+        run: go work init ./pkg ./app
+      - name: Run App Test
+        run: make test-app
+      - name: Run Pkg Test
+        run: make test-pkg
+  integration-test:
+    name: Run Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Go Setup
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: app/go.mod
+          cache:true
+        cache-dependency-path: app/go.sum
+      - name: Setup Workspace
+        run: go work init ./pkg ./app
+      - name: Run Api Integration Test
+        run: make test-integration
