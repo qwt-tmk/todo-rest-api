@@ -40,7 +40,7 @@ jobs:
         with:
           go-version-file: app/go.mod
           cache: true
-        cache-dependency-path: app/go.sum
+          cache-dependency-path: app/go.sum
       - name: Setup Workspace
         run: go work init ./pkg ./app
       - name: Run Api Integration Test
