@@ -42,7 +42,7 @@ func TestHash(t *testing.T) {
 	}
 }
 
-func TestCompare(t testing.T) {
+func TestCompare(t *testing.T) {
 	tests := []struct {
 		name           string
 		password       string
