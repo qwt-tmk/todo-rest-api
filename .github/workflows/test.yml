@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version-file: app/go.mod
-          cache:true
+          cache: true
         cache-dependency-path: app/go.sum
       - name: Setup Workspace
         run: go work init ./pkg ./app
