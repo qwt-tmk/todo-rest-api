@@ -3,8 +3,8 @@ package user
 import (
 	"unicode/utf8"
 
-	"github.com/qwt-tmk/app/domain/errors"
 	"github.com/qwt-tmk/pkg/hash"
+	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 )
 
 type HashedPassword struct {

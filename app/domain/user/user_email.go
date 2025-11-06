@@ -3,7 +3,7 @@ package user
 import (
 	"net/mail"
 
-	"github.com/qwt-tmk/app/domain/errors"
+	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 )
 
 type Email struct {

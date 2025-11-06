@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
-	"github.com/qwt-tmk/todo-rest-api/app/domain/errors"
+	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 )
 
 func TestNewUser(t *testing.T) {
