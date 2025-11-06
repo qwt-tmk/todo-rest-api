@@ -53,7 +53,7 @@ func TestUserDomainService_IsExists(t *testing.T) {
 			t.Parallel()
 			
 			ctrl := gomock.NewController(t)
-			MockUserRepository := MockUserRepository(ctrl)
+			MockUserRepository := NewMockUserRepository(ctrl)
 			// モック呼び出しの設定
 			tt.mockFn(MockUserRepository)
 			// ドメインサービスを作成

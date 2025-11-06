@@ -64,7 +64,7 @@ test-query:
 
 # pkgディレクトリのテスト
 # コマンド例: $ make test-pkg path=./... opts="-run TestXxx"
-test-query:
+test-pkg:
 	$(eval TEST_PATH=$(or $(path),./...))
 	$(eval TEST_TAGS=$(tags))
 	$(eval TEST_OPTIONS=${opts})
@@ -167,13 +167,13 @@ swag:
 
 ## パッケージ管理 ##
 
-# github.com/qwt-tmk/app においてgo getする
+# github.com/qwt-tmk/app においてgo installする
 # コマンド例: $ make get-app name=github.com/xxxx/xxx
 get-app:
-	cd ./app && go get $(name)
+	cd ./app && go install $(name)
 
 get-pkg:
-	cd ./pkg && go get $(name)
+	cd ./pkg && go install $(name)
 
 
 ## go generate ##

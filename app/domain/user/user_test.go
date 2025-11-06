@@ -61,7 +61,7 @@ func TestNewUser(t *testing.T) {
 			if (err != nil) != tt.wantErr && errors.Is(err, tt.errType) {
 				t.Fatalf("NewUser() error=%v,but wantErr %v", err, tt.wantErr)
 			}
-			if diff := cmp.Diff(got, tt.want, cmp.AllowUnexported(User{}, Email{}, HashedPassword{}), cmpopts.IgnoreFields(User{}, "id", "HashedPassword")); diff != "" {
+			if diff := cmp.Diff(got, tt.want, cmp.AllowUnexported(User{}, Email{}, HashedPassword{}), cmpopts.IgnoreFields(User{}, "id", "hashedPassword")); diff != "" {
 				t.Errorf("NewUser() -got,+want :%v", diff)
 			}
 		})
