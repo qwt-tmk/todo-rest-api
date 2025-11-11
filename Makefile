@@ -170,10 +170,10 @@ swag:
 # github.com/qwt-tmk/app においてgo installする
 # コマンド例: $ make get-app name=github.com/xxxx/xxx
 get-app:
-	cd ./app && go install $(name)
+	cd ./app && go get $(name)
 
 get-pkg:
-	cd ./pkg && go install $(name)
+	cd ./pkg && go get $(name)
 
 
 ## go generate ##

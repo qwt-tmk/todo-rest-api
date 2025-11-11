@@ -37,7 +37,7 @@ services:
         source: ./app/infrastructure/db/mysql
         target: /etc/mysql/conf.d
     ports:
-      - "3306:3306"
+      - "33061:3306"
     environment:
       MYSQL_DATABASE: todo-db
       MYSQL_USER: user

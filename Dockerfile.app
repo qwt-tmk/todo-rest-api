@@ -2,6 +2,9 @@ FROM golang:1.25.3
 
 WORKDIR /src
 
+ADD /certificates /usr/local/share/ca-certificates/
+RUN apt install ca-certificates && update-ca-certificates
+
 COPY ./app/go.mod ./app/go.mod
 COPY ./app/go.sum ./app/go.sum
 WORKDIR /src/app
