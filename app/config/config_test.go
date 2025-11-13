@@ -11,7 +11,7 @@ func TestInitConfig(t *testing.T) {
 	}{
 		{
 			name: "正常系：ADDRESS環境変数を読み込む",
-			want: ":8081"
+			want: ":8081",
 			setEnv: ":8081",
 			wantErr: false,
 		},
@@ -29,7 +29,7 @@ func TestInitConfig(t *testing.T) {
 			}
 
 			if got != tt.want {
-				t.Errorf("want %v, but got: &v", tt.want, got)
+				t.Errorf("want %v, but got: %v", tt.want, got)
 			}
 		})
 	}

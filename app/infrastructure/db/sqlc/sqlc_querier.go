@@ -1,0 +1,86 @@
+package sqlc
+
+import (
+	"context"
+
+	"github.com/qwt-tmk/todo-rest-api/adapter/repository"
+	"github.com/qwt-tmk/todo-rest-api/infrastructure/db"
+)
+
+// Querierインターフェースを満たす
+// sqlc はここから利用する
+type SqlcQuerier struct {
+	queries *Queries
+}
+
+func NewSqlcQuerier() *SqlcQuerier {
+	return &SqlcQuerier{
+		queries: New(db.GetDB()),
+	}
+}
+
+func (sq *SqlcQuerier) DeleteTask(ctx context.Context, id string) error {
+	err := sq.queries.DeleteTask(ctx, id)
+	return err
+}
+
+func (sq *SqlcQuerier) DeleteUser(ctx context.Context, id string) error {
+	err := sq.queries.DeleteUser(ctx, id)
+	return err
+}
+
+func (sq *SqlcQuerier) FetchAllUser(ctx context.Context) ([]repository.FetchAllUsersRow, error) {
+	rows, err := sq.queries.FetchAllUsers(ctx)
+	var r []repository.FetchAllUsersRow
+	for _, row := range rows {
+		r = append(r, repository.FetchAllUsersRow(row))
+	}
+	return r, err
+}
+
+func (sq *SqlcQuerier) FindTaskById(ctx context.Context, id string) (repository.FindTaskByIdRow, error) {
+	row, err := sq.queries.FindTaskById(ctx, id)
+	return repository.FindTaskByIdRow(row), err
+}
+
+func (sq *SqlcQuerier) FindUserByEmail(ctx context.Context, email string) (repository.FindUserByEmailRow, error) {
+	row, err := sq.queries.FindUserByEmail(ctx, email)
+	return repository.FindUserByEmailRow(row), err
+}
+
+func (sq *SqlcQuerier) FindUserById(ctx context.Context, id string) (repository.FindUserByIdRow, error) {
+	row, err := sq.queries.FindUserById(ctx, id)
+	return repository.FindUserByIdRow(row), err
+}
+
+func (sq *SqlcQuerier) InsertTask(ctx context.Context, arg repository.InsertTaskParams) error {
+	err := sq.queries.InsertTask(ctx, InsertTaskParams(arg))
+	return err
+}
+
+func (sq *SqlcQuerier) InsertUser(ctx context.Context, arg repository.InsertUserParams) error {
+	err := sq.queries.InsertUser(ctx, InsertUserParams{
+		ID:             arg.ID,
+		Name:           arg.Name,
+		Email:          arg.Email,
+		HashedPassword: arg.HashedPassword,
+	})
+	return err
+}
+
+func (sq *SqlcQuerier) UpdateTask(ctx context.Context, arg repository.UpdateTaskParams) error {
+	err := sq.queries.UpdateTask(ctx, UpdateTaskParams{
+		ID: arg.ID,
+		State: arg.State,
+	})
+	return err
+}
+
+func (sq *SqlcQuerier) UpdateUser(ctx context.Context, arg repository.UpdateUserParams) error {
+	err := sq.queries.UpdateUser(ctx, UpdateUserParams{
+		ID: arg.ID,
+		Name: arg.Name,
+		Email: arg.Email,
+	})
+	return err
+}
