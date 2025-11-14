@@ -3,6 +3,7 @@ package sqlc
 import (
 	"context"
 
+	"github.com/qwt-tmk/todo-rest-api/adapter/queryservice"
 	"github.com/qwt-tmk/todo-rest-api/adapter/repository"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/db"
 )
@@ -83,4 +84,27 @@ func (sq *SqlcQuerier) UpdateUser(ctx context.Context, arg repository.UpdateUser
 		Email: arg.Email,
 	})
 	return err
+}
+
+func (sq *SqlcQuerier) FetchTaskById(ctx context.Context, id string) (queryservice.FetchTaskByIdRow, error) {
+	row, err := sq.queries.FetchTaskById(ctx, id)
+	return queryservice.FetchTaskByIdRow(row), err
+}
+
+func (sq *SqlcQuerier) FetchAllTasks(ctx context.Context) ([]queryservice.FetchAllTasksRow, error) {
+	rows, err := sq.queries.FetchAllTasks(ctx)
+	var r []queryservice.FetchAllTasksRow
+	for _, row := range rows {
+		r = append(r, queryservice.FetchAllTasksRow(row))
+	}
+	return r, err
+}
+
+func (sq *SqlcQuerier) FetchUserTasks(ctx context.Context, userID string) ([]queryservice.FetchUserTasksRow, error) {
+	rows, err := sq.queries.FetchUserTasks(ctx, userID)
+	var r []queryservice.FetchUserTasksRow
+	for _, row := range rows {
+		r = append(r, queryservice.FetchUserTasksRow(row))
+	}
+	return r, err
 }
