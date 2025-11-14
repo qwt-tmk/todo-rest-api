@@ -7,6 +7,7 @@ import (
 
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/db"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/db/container"
+	"github.com/qwt-tmk/todo-rest-api/infrastructure/kvs"
 )
 
 func TestMain(m *testing.M) {
@@ -23,11 +24,16 @@ func TestMain(m *testing.M) {
 	db.SetDB(testDB)
 	log.Println("dockertest & test-db settings complete")
 
+	// テスト用のredisサーバーを起動
+	cli := kvs.NewRedisTestClient()
+
 	code := m.Run()
 
 	container.RemoveDockertestContainer(pool, resource)
 	log.Println("success to remove dockertest container")
 	testDB.Close()
+
+	cli.Close()
 
 	os.Exit(code)
 }
