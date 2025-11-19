@@ -41,18 +41,18 @@ func (m *MockJwtAuthenticatorRepository) EXPECT() *MockJwtAuthenticatorRepositor
 	return m.recorder
 }
 
-// Delte mocks base method.
-func (m *MockJwtAuthenticatorRepository) Delte(ctx context.Context, userID string) error {
+// Delete mocks base method.
+func (m *MockJwtAuthenticatorRepository) Delete(ctx context.Context, userID string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Delte", ctx, userID)
+	ret := m.ctrl.Call(m, "Delete", ctx, userID)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// Delte indicates an expected call of Delte.
-func (mr *MockJwtAuthenticatorRepositoryMockRecorder) Delte(ctx, userID any) *gomock.Call {
+// Delete indicates an expected call of Delete.
+func (mr *MockJwtAuthenticatorRepositoryMockRecorder) Delete(ctx, userID any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delte", reflect.TypeOf((*MockJwtAuthenticatorRepository)(nil).Delte), ctx, userID)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Delete", reflect.TypeOf((*MockJwtAuthenticatorRepository)(nil).Delete), ctx, userID)
 }
 
 // Load mocks base method.
