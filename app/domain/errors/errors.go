@@ -8,17 +8,17 @@ import (
 // ユーザー関連のドメインエラー
 var (
 	ErrAlreadyRegistered = newErrDomain("ErrAlreadyRegistered", "you have been already registered")
-	ErrInvalidEmail = newErrDomain("ErrInvalidEmail", "invalid email address")
-	ErrPasswordMismatch = newErrDomain("ErrPasswordMismatch", "thie password is incorrect")
-	ErrPasswordTooShort = newErrDomain("ErrPasswordTooShort", "password is too short")
-	ErrNotFoundUser = newErrDomain("ErrNotFoundUser", "user not found")
+	ErrInvalidEmail      = newErrDomain("ErrInvalidEmail", "invalid email address")
+	ErrPasswordMismatch  = newErrDomain("ErrPasswordMismatch", "thie password is incorrect")
+	ErrPasswordTooShort  = newErrDomain("ErrPasswordTooShort", "password is too short")
+	ErrNotFoundUser      = newErrDomain("ErrNotFoundUser", "user not found")
 )
 
 // タスク関係のドメインエラー
 var (
-	ErrNotFoundTask = newErrDomain("ErrNotFoundTask", "task not found")
-	ErrContentEmpty = newErrDomain("ErrContentempty", "Do not empty the content")
-	ErrInvalidTaskState = newErrDomain("ErrInvalidTaskState", "invalid task state, plase select todo/doing/done")
+	ErrNotFoundTask           = newErrDomain("ErrNotFoundTask", "task not found")
+	ErrContentEmpty           = newErrDomain("ErrContentempty", "Do not empty the content")
+	ErrInvalidTaskState       = newErrDomain("ErrInvalidTaskState", "invalid task state, plase select todo/doing/done")
 	ErrForbiddenTaskOperation = newErrDomain("ErrForbiddenTaskOperation", "can't operate others tasks")
 )
 

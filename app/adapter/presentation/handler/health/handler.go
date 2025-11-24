@@ -6,11 +6,11 @@ import (
 	"github.com/qwt-tmk/todo-rest-api/adapter/presentation/presenter"
 )
 
-// @Summary apiのヘルスチェックを行う
-// @Description apiのヘルスチェックを行う。ルーティングが正常に登録されているかを確かめる。
-// @Tags HealthCheck
-// @Success 200 {object} presentor.SuccessResponse[healthResponse] "Health check message"
-// @Router /health [get]
+// @Summary		apiのヘルスチェックを行う
+// @Description	apiのヘルスチェックを行う。ルーティングが正常に登録されているかを確かめる。
+// @Tags			HealthCheck
+// @Success		200	{object}	presenter.SuccessResponse[healthResponse]	"Health check message"
+// @Router			/health [get]
 func HealthCheckHandler(rw http.ResponseWriter, r *http.Request) {
 	resp := healthResponse{
 		HealthCheck: "ok",

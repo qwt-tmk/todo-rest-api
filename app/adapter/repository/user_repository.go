@@ -87,9 +87,9 @@ func (ur *userRepository) FetchAllUsers(ctx context.Context) (user.Users, error)
 
 func (ur *userRepository) Update(ctx context.Context, user *user.User) error {
 	params := UpdateUserParams{
-		Name: user.GetName(),
+		Name:  user.GetName(),
 		Email: user.GetEmail().Value(),
-		ID: user.GetID(),
+		ID:    user.GetID(),
 	}
 	if err := ur.querier.UpdateUser(ctx, params); err != nil {
 		return err

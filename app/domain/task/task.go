@@ -26,10 +26,10 @@ func NewTask(
 		return nil, err
 	}
 	return &Task{
-		id: ulid.NewUlid(),
-		userId: userId,
+		id:      ulid.NewUlid(),
+		userId:  userId,
 		content: validatedContent,
-		state: validatedState,
+		state:   validatedState,
 	}, nil
 }
 
@@ -41,10 +41,10 @@ func ReconstructTask(
 	state int, // DBではint型でタスク状態を保存している
 ) *Task {
 	return &Task{
-		id: id,
-		userId: userId,
+		id:      id,
+		userId:  userId,
 		content: reconstructContent(content),
-		state: reconstructState(state),
+		state:   reconstructState(state),
 	}
 }
 
@@ -56,10 +56,10 @@ func (t *Task) UpdateState(
 		return nil, err
 	}
 	return &Task{
-		id: t.id,
-		userId: t.userId,
+		id:      t.id,
+		userId:  t.userId,
 		content: t.content,
-		state: validatedState,
+		state:   validatedState,
 	}, nil
 }
 

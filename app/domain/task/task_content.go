@@ -12,7 +12,7 @@ type Content struct {
 
 func newContent(value string) (Content, error) {
 	if utf8.RuneCountInString(value) == 0 {
-		return Content{} , errors.ErrContentEmpty
+		return Content{}, errors.ErrContentEmpty
 	}
 	return Content{value: value}, nil
 }

@@ -23,11 +23,11 @@ func (ftu *FetchTasksUsecase) Run(ctx context.Context) (
 	outputs := make([]*FetchTaskUsecaseOutputDTO, 0, len(dtos))
 	for _, dto := range dtos {
 		outputs = append(outputs, &FetchTaskUsecaseOutputDTO{
-			ID: dto.ID,
-			UserId: dto.UserId,
+			ID:       dto.ID,
+			UserId:   dto.UserId,
 			UserName: dto.UserName,
-			Content: dto.Content,
-			State: dto.State,
+			Content:  dto.Content,
+			State:    dto.State,
 		})
 	}
 	return outputs, nil

@@ -43,9 +43,9 @@ func ReconstructUser(
 	hashedPassword string,
 ) *User {
 	return &User{
-		id: id,
-		email: reconstructEmail(email),
-		name: name,
+		id:             id,
+		email:          reconstructEmail(email),
+		name:           name,
 		hashedPassword: reconstructHashedPassword(hashedPassword),
 	}
 }
@@ -60,9 +60,9 @@ func (u *User) UpdateUser(
 	}
 
 	return &User{
-		id: u.id,
-		email: validatedEmail,
-		name: name,
+		id:             u.id,
+		email:          validatedEmail,
+		name:           name,
 		hashedPassword: u.hashedPassword,
 	}, nil
 }

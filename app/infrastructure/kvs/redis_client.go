@@ -20,9 +20,9 @@ func GetRedisClient() *redis.Client {
 func NewRedisClient(ctx context.Context, cfg *config.Config) *redis.Client {
 	// Redisクライアントを作成
 	redisClient = redis.NewClient(&redis.Options{
-		Addr: fmt.Sprintf("%s:%s", cfg.Redis.Host, cfg.Redis.Port),
-		ReadTimeout: 3 * time.Second,
-		WriteTimeout: 3 * time.Second,
+		Addr:                  fmt.Sprintf("%s:%s", cfg.Redis.Host, cfg.Redis.Port),
+		ReadTimeout:           3 * time.Second,
+		WriteTimeout:          3 * time.Second,
 		ContextTimeoutEnabled: true,
 	})
 

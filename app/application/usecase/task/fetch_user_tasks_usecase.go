@@ -22,9 +22,9 @@ func (fltu *FetchUserTasksUsecase) Run(ctx context.Context, input FetchUserTasks
 	outputs := make([]*FetchUserTasksUsecaseOutputDTO, 0, len(dtos))
 	for _, dto := range dtos {
 		outputs = append(outputs, &FetchUserTasksUsecaseOutputDTO{
-			ID: dto.ID,
+			ID:      dto.ID,
 			Content: dto.Content,
-			State: dto.State,
+			State:   dto.State,
 		})
 	}
 	return outputs, nil

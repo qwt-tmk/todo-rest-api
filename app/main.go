@@ -1,14 +1,23 @@
+// @title						TODO API
+// @version					1.0
+// @description				This is TODO API by golang.
+// @host						localhost:8080
+// @BasePath					/
+// @securityDefinitions.apikey	BearerAuth
+// @in							header
+// @name						Authorization
 package main
 
 import (
 	"context"
 	"log"
 
+	_ "github.com/qwt-tmk/todo-rest-api/docs"
+
 	"github.com/qwt-tmk/todo-rest-api/config"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/db"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/kvs"
 )
-
 
 func main() {
 	ctx := context.Background()

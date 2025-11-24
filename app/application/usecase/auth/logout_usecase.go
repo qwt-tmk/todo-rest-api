@@ -8,11 +8,11 @@ type LogoutUsecase struct {
 }
 
 func NewLogoutUsecase(
-	jwtAuthenticator           JwtAuthenticator,
+	jwtAuthenticator JwtAuthenticator,
 	jwtAuthenticatorRepository JwtAuthenticatorRepository,
 ) *LogoutUsecase {
 	return &LogoutUsecase{
-		jwtAuthenticator: jwtAuthenticator,
+		jwtAuthenticator:           jwtAuthenticator,
 		jwtAuthenticatorRepository: jwtAuthenticatorRepository,
 	}
 }

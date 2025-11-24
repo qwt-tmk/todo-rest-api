@@ -43,10 +43,10 @@ func NewJwtAuthenticator() *jwtAuthenticator {
 
 func (ja *jwtAuthenticator) GenerateJwtToken(sub, jti string) (string, error) {
 	claims := jwt.StandardClaims{
-		Id: jti,
+		Id:        jti,
 		ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
-		IssuedAt: time.Now().Unix(),
-		Subject: sub,
+		IssuedAt:  time.Now().Unix(),
+		Subject:   sub,
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodRS256, claims)
 	jwtToken, err := token.SignedString(ja.privateKey)
@@ -59,7 +59,7 @@ func (ja *jwtAuthenticator) GenerateJwtToken(sub, jti string) (string, error) {
 // 署名済みのトークンを公開鍵によって検証する
 // クレームから取り出した値を返す
 func (ja *jwtAuthenticator) VerifyJwtToken(jwtToken string) (sub string, jti string, err error) {
-	token , err := jwt.Parse(jwtToken, func(t *jwt.Token) (interface{}, error) {
+	token, err := jwt.Parse(jwtToken, func(t *jwt.Token) (interface{}, error) {
 		// トークンの署名アルゴリズムをチェック
 		if _, ok := t.Method.(*jwt.SigningMethodRSA); !ok {
 			return nil, fmt.Errorf("unexpected signing method")

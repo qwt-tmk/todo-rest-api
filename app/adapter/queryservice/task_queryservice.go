@@ -82,11 +82,11 @@ func (tqs *taskQueryService) FetchAllTasks(ctx context.Context) ([]*taskUsecase.
 			int(r.State),
 		)
 		dtos = append(dtos, &taskUsecase.FetchTaskDTO{
-			ID: t.GetID(),
+			ID:       t.GetID(),
 			UserName: r.Name,
-			UserId: t.GetUserId(),
-			Content: t.GetContent().Value(),
-			State: t.GetState().StrValue(),
+			UserId:   t.GetUserId(),
+			Content:  t.GetContent().Value(),
+			State:    t.GetState().StrValue(),
 		})
 	}
 	return dtos, nil

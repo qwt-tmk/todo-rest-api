@@ -11,8 +11,8 @@ var (
 	userName = "root"
 	password = "secret"
 	hostname = "localhost"
-	dbName = "test-db"
-	port int // ポート番号は起動したコンテナから取得する（ランダム）
+	dbName   = "test-db"
+	port     int // ポート番号は起動したコンテナから取得する（ランダム）
 )
 
 func NewDockertestContaier() (*dockertest.Pool, *dockertest.Resource) {
@@ -28,7 +28,7 @@ func NewDockertestContaier() (*dockertest.Pool, *dockertest.Resource) {
 	// コンテナの起動設定を指定
 	runOptions := &dockertest.RunOptions{
 		Repository: "mysql",
-		Tag: "8",
+		Tag:        "8",
 		Env: []string{
 			"MYSQL_ROOT_PASSWORD=" + password,
 			"MYSQL_DATABASE=" + dbName,

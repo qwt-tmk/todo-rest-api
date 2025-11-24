@@ -20,16 +20,16 @@ func NewPostUserHandler(registerUsecase *user.RegisterUsecase) *PostUserHandler 
 	}
 }
 
-// @Summary ユーザーの登録
-// @Description 新しいユーザーを登録する
-// @Tags User
-// @Accept json
-// @Product json
-// @Param request body PostUserRequest true "ユーザー登録のための情報"
-// @Success 201 {object} presenter.SuccessResponse[PostUserResponse] "登録されたユーザーの情報"
-// @Failure 400 {object} presenter.FailureResponse "不正なリクエスト"
-// @Failure 500 {object} presenter.FailureResponse "内部サーバーエラー"
-// @Router /users [post]
+// @Summary		ユーザーの登録
+// @Description	新しいユーザーを登録する
+// @Tags			User
+// @Accept			json
+// @Product		json
+// @Param			request	body		PostUserRequest								true	"ユーザー登録のための情報"
+// @Success		201		{object}	presenter.SuccessResponse[PostUserResponse]	"登録されたユーザーの情報"
+// @Failure		400		{object}	presenter.FailureResponse					"不正なリクエスト"
+// @Failure		500		{object}	presenter.FailureResponse					"内部サーバーエラー"
+// @Router			/users [post]
 func (puh *PostUserHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	// jsonをデコード
 	var params PostUserRequest
@@ -43,8 +43,8 @@ func (puh *PostUserHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	}
 	// DTOに詰め替える
 	input := user.RegisterUsecaseInputDTO{
-		Name: params.Name,
-		Email: params.Email,
+		Name:     params.Name,
+		Email:    params.Email,
 		Password: params.Password,
 	}
 	// ユースケースに渡して実行
@@ -59,9 +59,9 @@ func (puh *PostUserHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	resp := PostUserResponse{
-		ID: output.ID,
+		ID:    output.ID,
 		Email: output.Email,
-		Name: output.Name,
+		Name:  output.Name,
 	}
 	presenter.RespondCreated(rw, resp)
 }

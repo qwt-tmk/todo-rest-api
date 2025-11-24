@@ -71,7 +71,7 @@ func (sq *SqlcQuerier) InsertUser(ctx context.Context, arg repository.InsertUser
 
 func (sq *SqlcQuerier) UpdateTask(ctx context.Context, arg repository.UpdateTaskParams) error {
 	err := sq.queries.UpdateTask(ctx, UpdateTaskParams{
-		ID: arg.ID,
+		ID:    arg.ID,
 		State: arg.State,
 	})
 	return err
@@ -79,8 +79,8 @@ func (sq *SqlcQuerier) UpdateTask(ctx context.Context, arg repository.UpdateTask
 
 func (sq *SqlcQuerier) UpdateUser(ctx context.Context, arg repository.UpdateUserParams) error {
 	err := sq.queries.UpdateUser(ctx, UpdateUserParams{
-		ID: arg.ID,
-		Name: arg.Name,
+		ID:    arg.ID,
+		Name:  arg.Name,
 		Email: arg.Email,
 	})
 	return err

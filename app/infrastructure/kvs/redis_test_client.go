@@ -15,9 +15,9 @@ func NewRedisTestClient() *redis.Client {
 	}
 	// *redis.Clientをパッケージ変数にセット
 	redisClient = redis.NewClient(&redis.Options{
-		Addr: s.Addr(),
+		Addr:     s.Addr(),
 		Password: "",
-		DB: 0,
+		DB:       0,
 	})
 	return redisClient
 }

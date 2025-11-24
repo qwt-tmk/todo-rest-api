@@ -35,9 +35,9 @@ func (utu *UpdateTaskStateUsecase) Run(ctx context.Context, input UpdateTaskStat
 		return nil, err
 	}
 	return &UpdateTaskStateUsecaseOutputDTO{
-		ID: updatedTask.GetID(),
-		UserId: updatedTask.GetUserId(),
+		ID:      updatedTask.GetID(),
+		UserId:  updatedTask.GetUserId(),
 		Content: updatedTask.GetContent().Value(),
-		State: updatedTask.GetState().StrValue(),
+		State:   updatedTask.GetState().StrValue(),
 	}, nil
 }

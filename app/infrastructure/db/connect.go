@@ -45,7 +45,7 @@ func NewDB(ctx context.Context, cfg *config.Config) func() {
 
 const (
 	maxRetriesCount = 5
-	initialDelay = 5 * time.Second
+	initialDelay    = 5 * time.Second
 )
 
 // DBへ接続するヘルパー
@@ -76,4 +76,3 @@ func connect(ctx context.Context, user, password, host, port, name string) (*sql
 
 	return nil, nil, fmt.Errorf("failed to connect to db after %d attempts", maxRetriesCount)
 }
-

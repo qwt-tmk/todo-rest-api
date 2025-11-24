@@ -1,0 +1,471 @@
+basePath: /
+definitions:
+  auth.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  auth.LoginResponse:
+    properties:
+      jwt_token:
+        type: string
+    type: object
+  health.healthResponse:
+    properties:
+      health_check:
+        type: string
+    type: object
+  presenter.FailureResponse:
+    properties:
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-array_task_GetTaskResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/task.GetTaskResponse'
+        type: array
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-array_user_GetUsersResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/user.GetUsersResponse'
+        type: array
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-auth_LoginResponse:
+    properties:
+      data:
+        $ref: '#/definitions/auth.LoginResponse'
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-health_healthResponse:
+    properties:
+      data:
+        $ref: '#/definitions/health.healthResponse'
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-task_GetTaskResponse:
+    properties:
+      data:
+        $ref: '#/definitions/task.GetTaskResponse'
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-task_PostTaskResponse:
+    properties:
+      data:
+        $ref: '#/definitions/task.PostTaskResponse'
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-task_UpdateTaskStateResponse:
+    properties:
+      data:
+        $ref: '#/definitions/task.UpdateTaskStateResponse'
+      status:
+        type: integer
+    type: object
+  presenter.SuccessResponse-user_PostUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/user.PostUserResponse'
+      status:
+        type: integer
+    type: object
+  task.GetTaskResponse:
+    properties:
+      content:
+        type: string
+      id:
+        type: string
+      state:
+        type: string
+      user_id:
+        type: string
+      user_name:
+        type: string
+    type: object
+  task.PostTaskRequest:
+    properties:
+      content:
+        type: string
+      state:
+        type: string
+    required:
+    - content
+    - state
+    type: object
+  task.PostTaskResponse:
+    properties:
+      content:
+        type: string
+      id:
+        type: string
+      state:
+        type: string
+      user_id:
+        type: string
+    type: object
+  task.UpdateTaskStateRequest:
+    properties:
+      state:
+        type: string
+    required:
+    - state
+    type: object
+  task.UpdateTaskStateResponse:
+    properties:
+      content:
+        type: string
+      id:
+        type: string
+      state:
+        type: string
+      user_id:
+        type: string
+    type: object
+  user.GetUsersResponse:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  user.PostUserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  user.PostUserResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is TODO API by golang.
+  title: TODO API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      description: apiのヘルスチェックを行う。ルーティングが正常に登録されているかを確かめる。
+      responses:
+        "200":
+          description: Health check message
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-health_healthResponse'
+      summary: apiのヘルスチェックを行う
+      tags:
+      - HealthCheck
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: メールアドレス・パスワードで認証し、署名されたトークンを返す
+      parameters:
+      - description: 認証に必要な情報
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/auth.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 署名されたトークンを含む情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-auth_LoginResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "401":
+          description: パスワードが不一致
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      summary: ユーザーのログイン
+      tags:
+      - Auth
+  /logout:
+    delete:
+      description: メールアドレス・パスワードで認証し、署名されたトークンを返す
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: ユーザーのログアウト
+      tags:
+      - Auth
+  /tasks:
+    get:
+      description: 全ユーザーのタスクを全て表示する
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: タスクの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-array_task_GetTaskResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: 全てのタスクを表示する
+      tags:
+      - Task
+    post:
+      description: 内容、タスク状態からユーザーに紐づくタスクを作成する
+      parameters:
+      - description: タスク作成のための情報
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/task.PostTaskRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 作成したタスクの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-task_PostTaskResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: タスクを作成する
+      tags:
+      - Task
+  /tasks/{id}:
+    delete:
+      description: 指定したidのタスクを削除する
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "403":
+          description: 権限エラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: タスクを削除する
+      tags:
+      - Task
+    get:
+      description: idを指定してタスクを表示する
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-task_GetTaskResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: タスクを表示する
+      tags:
+      - Task
+    patch:
+      description: タスクの状態(todo/doing/done)を 指定して更新する
+      parameters:
+      - description: タスク更新のための情報
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/task.UpdateTaskStateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: 更新したタスクの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-task_UpdateTaskStateResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "403":
+          description: 権限エラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: タスク状態を更新する
+      tags:
+      - Task
+  /users:
+    get:
+      description: 全てのユーザーのID・名前をリストで取得する
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 登録されたユーザーの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-array_user_GetUsersResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: 全てのユーザーを取得する
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: 新しいユーザーを登録する
+      parameters:
+      - description: ユーザー登録のための情報
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/user.PostUserRequest'
+      responses:
+        "201":
+          description: 登録されたユーザーの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-user_PostUserResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      summary: ユーザーの登録
+      tags:
+      - User
+  /users/me:
+    delete:
+      description: ユーザーを退会させ、ユーザー情報を削除する
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: ユーザーの退会
+      tags:
+      - User
+  /users/me/tasks:
+    get:
+      description: ログインしているユーザーのタスクを全て表示する
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: タスクの情報
+          schema:
+            $ref: '#/definitions/presenter.SuccessResponse-array_task_GetTaskResponse'
+        "400":
+          description: 不正なリクエスト
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+        "500":
+          description: 内部サーバーエラー
+          schema:
+            $ref: '#/definitions/presenter.FailureResponse'
+      security:
+      - BearerAuth: []
+      summary: ユーザーが持つ全てのタスクを表示する
+      tags:
+      - Task
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -27,9 +27,9 @@ func (ctu *CreateTaskUsecase) Run(ctx context.Context, input CreateTaskUsecaseIn
 		return nil, err
 	}
 	return &CreateTaskUsecaseOutputDTO{
-		ID: t.GetID(),
-		UserId: t.GetUserId(),
+		ID:      t.GetID(),
+		UserId:  t.GetUserId(),
 		Content: t.GetContent().Value(),
-		State: t.GetState().StrValue(),
+		State:   t.GetState().StrValue(),
 	}, nil
 }

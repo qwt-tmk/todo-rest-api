@@ -1,7 +1,7 @@
 package user
 
 type FetchUsersUsecaseOutputDTO struct {
-	ID string
+	ID   string
 	Name string
 }
 

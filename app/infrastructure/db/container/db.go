@@ -9,10 +9,10 @@ import (
 	"strconv"
 
 	"github.com/golang-migrate/migrate/v4"
-	"github.com/ory/dockertest/v3"
-	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+	"github.com/ory/dockertest/v3"
+	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 )
 
 // DBに接続する
