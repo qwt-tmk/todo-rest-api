@@ -34,3 +34,4 @@ go.work.sum
 certificates/*
 
 .DS_Store
+app/tmp/

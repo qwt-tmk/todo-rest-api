@@ -15,7 +15,7 @@ services:
     environment:
       PORT: ":8080"
       TODO_DB_HOST: db
-      TODO_DB_PORT: 3306
+      TODO_DB_PORT: 33061
       TODO_DB_USER: user
       TODO_DB_PASSWORD: pswd
       TODO_DB_NAME: todo-db
