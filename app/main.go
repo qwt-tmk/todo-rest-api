@@ -17,6 +17,8 @@ import (
 	"github.com/qwt-tmk/todo-rest-api/config"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/db"
 	"github.com/qwt-tmk/todo-rest-api/infrastructure/kvs"
+	"github.com/qwt-tmk/todo-rest-api/infrastructure/router"
+	"github.com/qwt-tmk/todo-rest-api/infrastructure/server"
 )
 
 func main() {
@@ -37,4 +39,7 @@ func run(ctx context.Context, cfg *config.Config) {
 
 	redisClient := kvs.NewRedisClient(ctx, cfg)
 	defer redisClient.Close()
+
+	srv := server.NewServer(cfg.Server.Port, router.NewMux())
+	srv.Run(ctx)
 }

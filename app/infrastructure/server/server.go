@@ -36,7 +36,7 @@ func (s *server) Run(ctx context.Context) error {
 	defer stop()
 	eg, ctx := errgroup.WithContext(ctx)
 	eg.Go(func() error {
-		// サーバー起動厨二エラーが起きると、ctxに田脱される（Shutdownによるエラーは正常なので無視）
+		// サーバー起動中にエラーが起きると、ctxに伝達される（Shutdownによるエラーは正常なので無視）
 		log.Printf("server is running at port %q...", s.srv.Addr)
 		if err := s.srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			log.Printf("http server on %s failed : %v", s.srv.Addr, err)

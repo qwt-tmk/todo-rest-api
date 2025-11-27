@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/qwt-tmk/todo-rest-api/application/usecase/auth"
 	"github.com/qwt-tmk/todo-rest-api/domain/errors"
 )
 
@@ -25,7 +26,7 @@ var rawPublicKey []byte
 // NOTE:
 // embedで指定したフィアルをバイトスライスにして読み込むことができる
 
-func NewJwtAuthenticator() *jwtAuthenticator {
+func NewJwtAuthenticator() auth.JwtAuthenticator {
 	// *rsa.PrivateKeyにパース
 	privateKey, err := parsePrivateKey(rawPrivateKey)
 	if err != nil {

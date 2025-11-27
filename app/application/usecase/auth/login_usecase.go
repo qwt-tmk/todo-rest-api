@@ -45,7 +45,7 @@ func (lu *LoginUsecase) Run(ctx context.Context, input LoginUsecaseInputDTO) (
 	}
 	// トークンを生成
 	jti := ulid.NewUlid() //JWTトークンを識別するID
-	jwtToken, err := lu.jwtAuthenticator.GerateJwtToken(u.GetID(), jti)
+	jwtToken, err := lu.jwtAuthenticator.GenerateJwtToken(u.GetID(), jti)
 	if err != nil {
 		return nil, err
 	}
