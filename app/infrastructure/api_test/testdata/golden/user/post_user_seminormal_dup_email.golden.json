@@ -1,0 +1,4 @@
+{
+  "status": 400,
+  "message": "errType: ErrAlreadyRegistered , Message : you have been already registered"
+}

@@ -45,7 +45,7 @@ func registerRoutes(mux *http.ServeMux) {
 		mux.Handle("DELETE /tasks/{id}", composeMiddlewares(logger, authorization)(deleteTaskHandler))
 		mux.Handle("PATCH /tasks/{id}/state", composeMiddlewares(logger, authorization)(updateTaskStateHandler))
 		mux.Handle("GET /tasks/{id}", composeMiddlewares(logger, authorization)(getTaskHandler))
-		mux.Handle("GET /tasks", composeMiddlewares(logger, authorization)(getTaskHandler))
-		mux.Handle("GET /users/me/tasks", composeMiddlewares(logger, authorization)(getUserTaskHandler))
+		mux.Handle("GET /tasks", composeMiddlewares(logger, authorization)(getTasksHandler))
+		mux.Handle("GET /users/me/tasks", composeMiddlewares(logger, authorization)(getUserTasksHandler))
 	}
 }

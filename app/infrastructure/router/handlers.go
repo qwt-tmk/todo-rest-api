@@ -39,7 +39,7 @@ var (
 	updateTaskStateHandler *task.UpdateTaskStateHandler
 	getTaskHandler         *task.GetTaskHandler
 	getTasksHandler        *task.GetTasksHandler
-	getUserTaskHandler     *task.GetUserTasksHandler
+	getUserTasksHandler    *task.GetUserTasksHandler
 )
 
 // ハンドラーを初期化する
@@ -116,5 +116,13 @@ func initTaskHandlers() {
 		taskUsecase.NewFetchTaskUsecase(
 			queryservice.NewTaskQueryService(sqlc.NewSqlcQuerier()),
 		),
+	)
+
+	getTasksHandler = task.NewGetTasksHandler(
+		taskUsecase.NewFetchTasksUsecase(queryservice.NewTaskQueryService(sqlc.NewSqlcQuerier())),
+	)
+
+	getUserTasksHandler = task.NewGetUserTasksHandler(
+		taskUsecase.NewFetchUserTasksUsecase(queryservice.NewTaskQueryService(sqlc.NewSqlcQuerier())),
 	)
 }
