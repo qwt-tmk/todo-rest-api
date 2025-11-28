@@ -21,4 +21,6 @@ RUN go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 RUN go install github.com/swaggo/swag/cmd/swag@latest
 RUN go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
+RUN go env -w GOFLAGS="-buildvcs=false"
+
 CMD ["air"]

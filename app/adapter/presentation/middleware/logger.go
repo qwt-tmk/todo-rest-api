@@ -84,7 +84,7 @@ type rwWrapper struct {
 
 func newResponseWrapper(rw http.ResponseWriter, buf io.Writer) *rwWrapper {
 	return &rwWrapper{
-		rw: rw,
+		rw:          rw,
 		multiWriter: io.MultiWriter(rw, buf),
 	}
 }

@@ -23,7 +23,7 @@ type server struct {
 func NewServer(port string, mux http.Handler) *server {
 	return &server{
 		&http.Server{
-			Addr: port,
+			Addr:    port,
 			Handler: mux,
 		},
 	}
