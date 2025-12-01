@@ -32,7 +32,7 @@ func TestNewMux(t *testing.T) {
 			sut.ServeHTTP(w, rw)
 			resp := w.Result()
 			if resp.StatusCode != tt.wantCode {
-				t.Error("want status code %d, but got %d", tt.wantCode, resp.StatusCode)
+				t.Errorf("want status code %d, but got %d", tt.wantCode, resp.StatusCode)
 			}
 		})
 	}
